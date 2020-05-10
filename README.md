@@ -2,7 +2,7 @@
 
 ## Installation
 
-# You need to launch the server before : [cleantogather-api](https://github.com/Elorolf/cleantogather-api
+### You need to launch the server before : [cleantogather-api](https://github.com/Elorolf/cleantogather-api
 
 ```sh
 git clone git@github.com:Elorolf/cleantogather-front.git

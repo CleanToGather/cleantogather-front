@@ -7,6 +7,7 @@
 ```sh
 git clone git@github.com:Elorolf/cleantogather-front.git
 cd cleantogather-front
+npm install
 npm start
 ```
 Runs the app in the development mode.<br />

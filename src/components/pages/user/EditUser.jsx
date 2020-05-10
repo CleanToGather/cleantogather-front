@@ -54,7 +54,7 @@ class EditUser extends Component {
                 <Typography variant="h4" style={style}>Edit User</Typography>
                 <form>
 
-                        <TextField type="text" placeholder="name" fullWidth margin="normal" name="name" readonly="true" value={this.state.name}/>
+                        <TextField type="text" placeholder="name" fullWidth margin="normal" name="name" readOnly={true} value={this.state.name}/>
 
                         <TextField placeholder="Email" fullWidth margin="normal" name="email" value={this.state.email} onChange={this.onChange}/>
 

@@ -46,12 +46,12 @@ class ListUser extends Component {
 
     editUser(id) {
         window.localStorage.setItem("userId", id);
-        this.props.history.push('/edit-user');
+        this.props.history.push('/users/edit');
     }
 
     addUser() {
         window.localStorage.removeItem("userId");
-        this.props.history.push('/add-user');
+        this.props.history.push('/users/add');
     }
 
     render() {

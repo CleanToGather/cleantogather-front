@@ -1,0 +1,46 @@
+
+.ligne{
+  display: flex;
+  justify-content: space-around;
+}
+
+.cells, .empty_cells{
+  width: 150px;
+  height : 100px;
+  text-align: center;
+  margin : 1%;
+}
+
+.cells {
+  border:solid 1px;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.title{
+  text-align: center;
+  font-size: 50px;
+}
+
+.semaine {
+  width : 150px;
+  text-align: center;
+}
+
+.title{
+  display: flex;
+  justify-content: space-around;
+}
+
+h1{
+  font-size: 50px;
+}
+
+button {
+  margin-top: 60px;
+  height : 20px;
+}
+
+.calendar {
+  background-color: lightblue;
+}

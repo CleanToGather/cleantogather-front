@@ -8,16 +8,15 @@ class Calendar extends React.Component {
     super(props);
     this.calendar = new Array(42);
     this.event = new Array(42);
-    this.state={date : this.props.date};
   }
 
   getEvents(){
     this.event = new Array(42);
-    var dateMois = new Date(this.state.date.getFullYear(),this.state.date.getMonth(),1);
+    var dateMois = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),1);
     var debut = dateMois.getDay();
     events.map(function(events){
       var date = new Date(events.date);
-      if (date.getMonth()==this.state.date.getMonth()){
+      if (date.getMonth()==this.props.date.getMonth()){
         this.event[debut-1+date.getDate()]=events.lieu+" "+events.description+" "+date.getUTCHours()+"h";
       }
     },this);
@@ -26,17 +25,17 @@ class Calendar extends React.Component {
   getTableau(){
     var j=0;
     var i=1;
-    var dateMois = new Date(this.state.date.getFullYear(),this.state.date.getMonth(),i);
+    var dateMois = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),i);
     while (j<dateMois.getDay()){
       this.calendar[j]='';
       j++;
     }
     
-    while (dateMois!=NaN && dateMois.getMonth()==this.state.date.getMonth()){
+    while (dateMois!=NaN && dateMois.getMonth()==this.props.date.getMonth()){
       this.calendar[j]=i.toString();
       j++;
       i++;
-      dateMois = new Date(this.state.date.getFullYear(),this.state.date.getMonth(),i);
+      dateMois = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),i);
     }
 
     while (j<this.calendar.length){

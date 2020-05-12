@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 class CalendarTitle extends React.Component {
 	render(){
 		var listMois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
-		return (<div className='title'>
+		return (<div class='title'>
       		<Button variant="contained" color="primary" onClick={this.props.changerMois2}>
         		Clique ici
       		</Button>

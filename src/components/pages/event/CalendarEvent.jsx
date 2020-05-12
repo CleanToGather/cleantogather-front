@@ -22,7 +22,7 @@ class CalendarEvent extends React.Component {
     return (
       <div className="flexContainer">
         <CalendarTitle date={this.state.date} changerMois1={this.changerMois1} changerMois2={this.changerMois2}/>
-        <div class ="calendar">
+        <div className ="calendar">
           <Calendar date={this.state.date}/>
         </div>
       </div>

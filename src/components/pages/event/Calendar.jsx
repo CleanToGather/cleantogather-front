@@ -51,13 +51,13 @@ class Calendar extends React.Component {
     var content = [];
     var listSemaine = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
     for (var k = 0; k <6; k++) {
-      content.push(<p><CalendarLine calendar={this.calendar} event={this.event} k={k}/></p>);
+      content.push(<CalendarLine calendar={this.calendar} event={this.event} k={k} key={k}/>);
     }
     return (
       <div>
-        <div class = 'ligne'>
-          {listSemaine.map(listSemaine => {
-            return(<div class="jour">{listSemaine}</div>);
+        <div className = 'ligne'>
+          {listSemaine.map(jour => {
+            return(<div className="jour" key={jour}>{jour}</div>);
           })}
         </div>
         {content}

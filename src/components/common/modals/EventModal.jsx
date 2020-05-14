@@ -1,15 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ApiService from "../../../services/ApiService";
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Container';
-
-import { display } from '@material-ui/system';
-
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 class EventModal extends React.Component {
     constructor(props) {
@@ -35,7 +31,7 @@ class EventModal extends React.Component {
     render() {
         return (
             <>
-                <Button size="sm" id="subscribe" onClick={() => this.setModalShow(true)}>
+                <Button variant="contained" color="primary" id="subscribe" onClick={() => this.setModalShow(true)}>
                     {this.props.children}
                 </Button>
 
@@ -43,21 +39,19 @@ class EventModal extends React.Component {
                 onHide={() => this.setModalShow(false)}
                 size="lg" centered>
                     <Modal.Header closeButton>
-                        <Modal.Title id="contained-modal-title-vcenter">
+                        <Typography variant="h4" id="contained-modal-title-vcenter">
                           {this.props.event.title}
-                        </Modal.Title>
+                        </Typography>
                     </Modal.Header>
                     <Modal.Body>
-                        <h4>Venez nombreux au {this.props.event.address} le {this.props.event.startDateTime}</h4>
-                        <p>
+                        <Typography variant="h5" style={{margin: 10}}>Venez nombreux au {this.props.event.address} <br/> le {this.props.event.startDateTime}</Typography>
+                        <Typography>
                           {this.props.event.description}
-                        </p>
+                        </Typography>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Form>
-                            <Form.Control name="mail" type="email" placeholder="Indiquez votre adresse mail" onChange={this.onChange}/>
-                            <Button onClick={this.subscribe}>S'inscrire</Button>
-                        </Form>
+                        <TextField className="mr-auto" style={{flexGrow:1}} name="mail" type="email" placeholder="Indiquez votre adresse mail" onChange={this.onChange}/>
+                        <Button onClick={this.subscribe}>S'inscrire</Button>
                     </Modal.Footer>
                 </Modal>
             </>

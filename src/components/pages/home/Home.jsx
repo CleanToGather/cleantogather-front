@@ -1,13 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import EventModal from '../../common/modals/EventModal'
 import ApiService from "../../../services/ApiService";
-
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid'
-import { display } from '@material-ui/system';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Home.css'
 
 class Home extends React.Component {
     constructor(props) {
@@ -28,7 +26,6 @@ class Home extends React.Component {
     }
 
     getNextEvent() {
-        let data;
         ApiService.fetchEvents()
             .then(res => {
                 if (res.data.length > 0) {
@@ -43,23 +40,23 @@ class Home extends React.Component {
 
     minDateIndex(dates) {
         let minIndex = 0;
-        dates.map(date => {
+        for (let date of dates) {
             if (date < dates[minIndex]) minIndex = date.index;
-        });
+        }
         return minIndex;
     }
 
     render() {
         return (
             <Container maxWidth="lg">
-                <Box>
+                <Box >
                     <Typography variant="h6" display="inline"> Prochaine marche le {this.state.nextEvent.startDateTime}</Typography>
                     <EventModal event={this.state.nextEvent}>
                         Participer
                     </EventModal>
                 </Box>
-                <Box>
-                    <Typography variant="h6">Grâce à Clean2Gather, participe au nettoyage de ta commune.<br/>
+                <Box id="tagline">
+                    <Typography variant="h5">Grâce à Clean2Gather, participe au nettoyage de ta commune.<br/>
                     Signale les zones à déchets ou participe à une marche de nettoyage collaborative pour rendre ta ville plus propre !</Typography>
                 </Box>
                 <Box>

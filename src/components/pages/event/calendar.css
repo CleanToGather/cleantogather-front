@@ -6,15 +6,19 @@
 
 .cells, .empty_cells{
   width: 150px;
-  height : 100px;
   text-align: center;
   margin : 1%;
 }
 
 .cells {
   border:solid 1px;
+  height : 100px;
   border-radius: 15px;
   background-color: white;
+}
+
+.empty_cells {
+  height:0px;
 }
 
 .title{
@@ -43,4 +47,5 @@ button {
 
 .calendar {
   background-color: lightblue;
+  margin-bottom: 50px;
 }

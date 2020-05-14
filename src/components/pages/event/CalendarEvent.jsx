@@ -18,6 +18,7 @@ class CalendarEvent extends React.Component {
   changerMois2 = () => {
     this.setState({date : new Date (this.state.date.getFullYear(),this.state.date.getMonth()-1,1)});
   }
+  
   render(){
     return (
       <div className="flexContainer">

@@ -1,16 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ApiService from "../../../services/ApiService";
 import Modal from 'react-bootstrap/Modal';
 import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 class EventModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {mail:'', modalShow: false}
+        this.state = {modalShow: false,
+            mail:''
+        }
         this.subscribe = this.subscribe.bind(this);
         this.onChange = this.onChange.bind(this);
         this.setModalShow = this.setModalShow.bind(this);
@@ -29,9 +28,10 @@ class EventModal extends React.Component {
     }
 
     render() {
+        let buttonStyle=(this.props.isContained && "MuiButton-contained MuiButton-containedPrimary");
         return (
             <>
-                <Button variant="contained" color="primary" id="subscribe" onClick={() => this.setModalShow(true)}>
+                <Button className={buttonStyle} id="eventModal" onClick={() => this.setModalShow(true)}>
                     {this.props.children}
                 </Button>
 
@@ -49,10 +49,12 @@ class EventModal extends React.Component {
                           {this.props.event.description}
                         </Typography>
                     </Modal.Body>
+                    {this.props.canSubscribe &&
                     <Modal.Footer>
                         <TextField className="mr-auto" style={{flexGrow:1}} name="mail" type="email" placeholder="Indiquez votre adresse mail" onChange={this.onChange}/>
                         <Button onClick={this.subscribe}>S'inscrire</Button>
-                    </Modal.Footer>
+                    </Modal.Footer>}
+
                 </Modal>
             </>
         );

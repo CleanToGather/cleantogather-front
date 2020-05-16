@@ -1,28 +1,47 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import EventModal from '../../common/modals/EventModal';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import CloseIcon from '@material-ui/icons/Close';
+import DoneIcon from '@material-ui/icons/Done'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Image from 'react-bootstrap/Image';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import '../home/Home.css'
 
 class Profil extends React.Component {
     constructor (props) {
         super(props);
         this.state = {isEditable : false,
-            pseudo : "Galaad",
-            mail : "galaad.moll@gmail.fr"};
+            user: {
+                name: "Galaad",
+                email: "galaad.moll@gmail.com",
+                eventSubscribed: [
+                    {
+                        title: "Titre",
+                        address: "13 Adresse idene ziudgshfil, PAis",
+                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        startDateTime: "11 mai 2020 à 13:00"
+                    },
+                    {
+                        id: 1,
+                        title: "Titre",
+                        address: "13 Adresse idene ziudgshfil, PAis",
+                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        startDateTime: "11 mai 2020 à 13:00"
+                    }
+                ]
+            },
+        };
 
         this.setEditable = this.setEditable.bind(this);
         this.submitEdit = this.submitEdit.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
-    setEditable() {
-        this.setState({isEditable: true});
+    setEditable(bool) {
+        this.setState({isEditable: bool});
     }
 
     submitEdit() {
@@ -35,48 +54,64 @@ class Profil extends React.Component {
 
     render() {
         let pseudo =(this.state.isEditable ?
-            <Form.Control type="text" name="pseudo" onChange={this.onChange} value={this.state.pseudo}/> :
-            this.state.pseudo);
+            <TextField name="name" onChange={this.onChange} value={this.state.user.name}/> :
+            <Typography variant="h6" display="inline">{this.state.user.name}</Typography>);
+
         let email =(this.state.isEditable ?
-            <Form.Control type="text" name="mail" onChange={this.onChange} value={this.state.mail}/> :
-            this.state.mail);
-        let modifyIcon = (this.state.isEditable ?
-            <a onClick={this.submitEdit}><Image src="cancel.svg" className="icon"/></a> :
-            <a onClick={this.setEditable}><Image src="modify.png" className="icon"/></a>);
+            <TextField name="email" onChange={this.onChange} value={this.state.user.email}/> :
+            <Typography variant="h6" display="inline">{this.state.user.email}</Typography>);
+
+        let editIcon = (this.state.isEditable ?
+            //True
+            <>
+            <IconButton aria-label="edit" onClick={this.submitEdit}>
+                <DoneIcon />
+            </IconButton>
+            <IconButton aria-label="edit" onClick={() => this.setEditable(false)}>
+                <CloseIcon />
+            </IconButton>
+            </> :
+            //False
+            <IconButton aria-label="edit" onClick={() => this.setEditable(true)}>
+                <EditIcon />
+            </IconButton>);
 
         return (
-            <Container id="content" fluid>
-                <Row className="box">
-                    <Col>
-                        <Image src="logo.png"/>
-                    </Col>
-                    <Col>
-                        <Row>
-                            Pseudo : {pseudo}
-                        </Row>
-                        <Row>
-                            Email : {email}
-                        </Row>
-                    </Col>
-                    {modifyIcon}
-                </Row>
-                {this.state.pseudo &&
-                    <Row className="box">
-                        <Form>
-                            <Form.Row>
-                                <Col>
-                                    <Form.Control type="email" placeholder="Email"/>
-                                </Col>
-                                <Col>
-                                    <Button type="submit">
-                                        Créer un compte administrateur
-                                    </Button>
-                                </Col>
-                            </Form.Row>
-                        </Form>
-                    </Row>
-                }
-            </Container>
+            <Grid container justify="space-evenly">
+                <Grid item xs={12} md={5} className="bigDiv">
+                    <Grid container direction="column" spacing={3}>
+                        <Grid item>
+                            <Grid container>
+                            <Typography variant="h5" style={{flexGrow:1}}>Informations</Typography>
+                            {editIcon}
+                            </Grid>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="h6" display="inline" style={{flexGrow:1}}>Pseudo : &nbsp;</Typography>{pseudo}
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="h6" display="inline">Email : &nbsp;</Typography>{email}
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12} md={5} className="bigDiv">
+                    <Grid container direction="column" alignItems="center" spacing={3}>
+                        <Grid item>
+                            <Typography variant="h5" style={{flexGrow:1}}>Vos événements</Typography>
+                        </Grid>
+                        {this.state.user.eventSubscribed.map(event => (
+                            <Grid item key={event.id}>
+                                <EventModal event={event}>
+                                <Grid justify="flex-start">
+                                    <Typography variant="h6" display="block">{event.title}</Typography><br/>
+                                    <Typography display="block">Le {event.startDateTime}</Typography>
+                                </Grid>
+                                </EventModal>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Grid>
+            </Grid>
         )
     }
 }

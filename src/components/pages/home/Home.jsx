@@ -7,6 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css'
 
+/*TODO:
+Fetch stats number of events and markers
+Subscribe to an event
+*/
+
 class Home extends React.Component {
     constructor(props) {
         super(props)
@@ -49,17 +54,17 @@ class Home extends React.Component {
     render() {
         return (
             <Container maxWidth="lg">
-                <Box >
+                <Box className="bigDiv">
                     <Typography variant="h6" display="inline"> Prochaine marche le {this.state.nextEvent.startDateTime}</Typography>
-                    <EventModal event={this.state.nextEvent}>
+                    <EventModal event={this.state.nextEvent} canSubscribe isContained>
                         Participer
                     </EventModal>
                 </Box>
-                <Box id="tagline">
+                <Box id="tagline" className="bigDiv">
                     <Typography variant="h5">Grâce à Clean2Gather, participe au nettoyage de ta commune.<br/>
                     Signale les zones à déchets ou participe à une marche de nettoyage collaborative pour rendre ta ville plus propre !</Typography>
                 </Box>
-                <Box>
+                <Box className="bigDiv">
                     <Typography variant="h6">{this.props.events} marches effectuées et plus de {this.props.markers} zones à déchets signalées</Typography>
                 </Box>
             </Container>

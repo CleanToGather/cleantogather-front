@@ -36,8 +36,6 @@ class Home extends React.Component {
                 if (res.data.length > 0) {
                     let datesArray = res.data.map(event => event.startDateTime);
                     let nextEvent = res.data[this.minDateIndex(datesArray)];
-                    nextEvent.startDateTime = new Date(nextEvent.startDateTime)
-                        .toLocaleString("fr-FR", {day: "numeric", month:"long", year: "numeric", hour: "numeric", minute: "numeric"});
                     this.setState({nextEvent: nextEvent});
                 }
             });
@@ -45,8 +43,8 @@ class Home extends React.Component {
 
     minDateIndex(dates) {
         let minIndex = 0;
-        for (let date of dates) {
-            if (date < dates[minIndex]) minIndex = date.index;
+        for (let i=0;i<dates.length;i++) {
+            if (dates[i] < dates[minIndex]) minIndex = i;
         }
         return minIndex;
     }
@@ -55,7 +53,7 @@ class Home extends React.Component {
         return (
             <Container maxWidth="lg">
                 <Box className="bigDiv">
-                    <Typography variant="h6" display="inline"> Prochaine marche le {this.state.nextEvent.startDateTime}</Typography>
+                    <Typography variant="h6" display="inline"> Prochaine marche le {new Date(this.state.nextEvent.startDateTime).toLocaleString("fr-FR", {day: "numeric", month:"long", year: "numeric", hour: "numeric", minute: "numeric"})}</Typography>
                     <EventModal event={this.state.nextEvent} canSubscribe isContained>
                         Participer
                     </EventModal>

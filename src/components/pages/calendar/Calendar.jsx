@@ -1,41 +1,61 @@
 import React from "react";
 import CalendarLine from "./CalendarLine";
+import ApiService from "../../../services/ApiService";
+import EventModal from '../../common/modals/EventModal';
 
-var events = [{lieu : "Paris", description :"test", date : "2020-05-30T16:00:39.409Z"},{lieu : "Issy", description :"test", date : "2020-06-05T15:20:39.409Z"}]
 
 class Calendar extends React.Component {
 	constructor(props) {
     super(props);
     this.calendar = new Array(42);
     this.event = new Array(42);
+    this.state = {
+      listEvents : []
+    }
+  }
+
+  componentDidMount(){
+    this.getEvents();
   }
 
   getEvents(){
-    this.event = new Array(42);
-    var dateMois = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),1);
-    var debut = dateMois.getDay();
-    events.map(function(events){
-      var date = new Date(events.date);
-      if (date.getMonth()==this.props.date.getMonth()){
-        this.event[debut-1+date.getDate()]=events.lieu+" "+events.description+" "+date.getUTCHours()+"h";
+    var addEvent = this.state.listEvents;
+    ApiService.fetchEvents().then(res => {
+      if (res.data.length > 0) {  
+        res.data.map(event => {
+          addEvent.push(event);
+        });
       }
-    },this);
+      this.setState({listEvents : addEvent});
+    });
   }
 
-  getTableau(){
+  addEventsInCalendar(){
+    this.event = new Array(42);
+    var monthDate = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),1);
+    var debut = monthDate.getDay();
+    this.state.listEvents.map(events =>{
+      var date = new Date(events.startDateTime);
+      if (date.getMonth()==this.props.date.getMonth()){
+        this.event[debut-1+date.getDate()]=<EventModal event={events} canSubscribe >{events.title}</EventModal>;
+      }
+    });
+  }
+
+  getCalendar(){
     var j=0;
     var i=1;
-    var dateMois = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),i);
-    while (j<dateMois.getDay()){
+    var mapMonth = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),i);
+    while (j<mapMonth.getDay()){
       this.calendar[j]='';
       j++;
     }
     
-    while (dateMois!=NaN && dateMois.getMonth()==this.props.date.getMonth()){
+    while (mapMonth!=NaN && mapMonth.getMonth()==this.props.date.getMonth()){
       this.calendar[j]=i.toString();
       j++;
       i++;
-      dateMois = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),i);
+      mapMonth = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),i);
     }
 
     while (j<this.calendar.length){
@@ -46,17 +66,17 @@ class Calendar extends React.Component {
   }
 
   render(){
-    this.getTableau();
-    this.getEvents();
+    this.getCalendar();
+    this.addEventsInCalendar();
     var content = [];
-    var listSemaine = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+    var listDays = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
     for (var k = 0; k <6; k++) {
       content.push(<CalendarLine calendar={this.calendar} event={this.event} k={k} key={k}/>);
     }
     return (
       <div>
         <div className = 'ligne'>
-          {listSemaine.map(jour => {
+          {listDays.map(jour => {
             return(<div className="jour" key={jour}>{jour}</div>);
           })}
         </div>

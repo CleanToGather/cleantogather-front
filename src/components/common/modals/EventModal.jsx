@@ -44,7 +44,7 @@ class EventModal extends React.Component {
                         </Typography>
                     </Modal.Header>
                     <Modal.Body>
-                        <Typography variant="h5" style={{margin: 10}}>Venez nombreux au {this.props.event.address} <br/> le {this.props.event.startDateTime}</Typography>
+                        <Typography variant="h5" style={{margin: 10}}>Venez nombreux au {this.props.event.address} <br/> le {new Date(this.props.event.startDateTime).toLocaleString("fr-FR", {day: "numeric", month:"long", year: "numeric", hour: "numeric", minute: "numeric"})}</Typography>
                         <Typography>
                           {this.props.event.description}
                         </Typography>

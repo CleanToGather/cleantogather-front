@@ -23,8 +23,8 @@ const NavBar = () => {
                     <Typography variant="h6" style={style}>
                         Clean2Gather
                     </Typography>
-                    <Button color="inherit">Evénements</Button>
-                    <Button color="inherit">Signaler</Button>
+                    <Button href="/calendar" color="inherit">Evénements</Button>
+                    <Button href="/markers" color="inherit">Signaler</Button>
                     {logged && <Button href="/profil" color="inherit">Profil</Button>}
                     
                     {logged ?

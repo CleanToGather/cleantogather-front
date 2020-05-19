@@ -44,7 +44,7 @@ class ListMarker extends Component {
 
     addAdress() {
         window.localStorage.removeItem("markerId");
-        this.props.history.push('/signalements/Formulaire');
+        this.props.history.push('/signalements/addMarkers');
     }
 
     render() {
@@ -59,6 +59,7 @@ return (
                     <TableHead>
                         <TableRow>
                             <TableCell>Id</TableCell>
+                            <TableCell align="right">address</TableCell>
                             <TableCell align="right">coord_x</TableCell>
                             <TableCell align="right">coord_y</TableCell>
                             <TableCell align="right">Editer</TableCell>
@@ -69,6 +70,7 @@ return (
                         {this.state.markers.map(row => (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">{row.id}</TableCell>
+                                <TableCell align="right">{row.address}</TableCell>
                                 <TableCell align="right">{row.coord_x}</TableCell>
                                 <TableCell align="right">{row.coord_y}</TableCell>
                                 <TableCell align="right" onClick={() => this.editmarker(row.id)}><CreateIcon /></TableCell>

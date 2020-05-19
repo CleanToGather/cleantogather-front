@@ -8,6 +8,7 @@ class Formulaire extends React.Component {
 	constructor(props){
         super(props);
         this.state ={
+            adress : '',
             coord_x: '',
             coord_y: '',
             markedDateTime : new Date().toJSON(),
@@ -18,7 +19,7 @@ class Formulaire extends React.Component {
 
     saveAdress = (e) => {
         e.preventDefault();
-        let marker = {coord_x: this.state.coord_x, coord_y: this.state.coord_y, markedDateTime : this.state.markedDateTime};
+        let marker = {address : this.state.address, coord_x: this.state.coord_x, coord_y: this.state.coord_y, markedDateTime : this.state.markedDateTime};
         ApiService.addMarker(marker)
             .then(res => {
                 this.setState({message : 'Marqueur ajouté avec succès'});
@@ -34,6 +35,7 @@ class Formulaire extends React.Component {
             <div>
                 <Typography variant="h4">Placer un marqueur</Typography>
                 <form>
+                    <TextField type="text" placeholder="address" fullWidth margin="normal" name="address" value={this.state.address} onChange={this.onChange}/>
                     <TextField type="text" placeholder="coord_x" fullWidth margin="normal" name="coord_x" value={this.state.coord_x} onChange={this.onChange}/>
                     <TextField type="text" placeholder="coord_y" fullWidth margin="normal" name="coord_y" value={this.state.coord_y} onChange={this.onChange}/>
                     <TextField type="text" placeholder="markedDateTime" fullWidth margin="normal" name="markedDateTime" value={this.state.markedDateTime} onChange={this.onChange}/>

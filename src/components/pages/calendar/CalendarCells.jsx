@@ -1,6 +1,6 @@
 import React from "react";
 
-class CaseCalendar extends React.Component {
+class CalendarCells extends React.Component {
 	render(){
 		if (this.props.calendar==""){
 			return(
@@ -9,10 +9,10 @@ class CaseCalendar extends React.Component {
 		}
 		else{
 			return(
-				<div className="cells"><p>{this.props.calendar}</p><p>{this.props.event}</p></div>
+				<div className="cells"><p>{this.props.calendar}</p>{this.props.event}</div>
 			);
 		}
 	}
 }
 
-export default CaseCalendar;
+export default CalendarCells;

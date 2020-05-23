@@ -44,15 +44,15 @@ class ListMarker extends Component {
 
     addAdress() {
         window.localStorage.removeItem("markerId");
-        this.props.history.push('/signalements/addMarkers');
+        this.props.history.push('/markers/add');
     }
 
     render() {
 return (
             <div>
-                <Typography variant="h4" style={style}>Détails des utilisateurs</Typography>
+                <Typography variant="h4" style={style}>Détails des signalements</Typography>
                 <Button variant="contained" color="primary" onClick={() => this.addAdress()}>
-                    Ajouter un utilisateur
+                    Ajouter un signalement
                 </Button>
 
                 <Table>
@@ -73,7 +73,7 @@ return (
                                 <TableCell align="right">{row.address}</TableCell>
                                 <TableCell align="right">{row.coord_x}</TableCell>
                                 <TableCell align="right">{row.coord_y}</TableCell>
-                                <TableCell align="right" onClick={() => this.editmarker(row.id)}><CreateIcon /></TableCell>
+                                <TableCell align="right" onClick={() => this.editMarker(row.id)}><CreateIcon /></TableCell>
                                 <TableCell align="right" onClick={() => this.deleteMarker(row.id)}><DeleteIcon /></TableCell>
                             </TableRow>
                         ))}

@@ -24,9 +24,12 @@ const NavBar = () => {
                         Clean2Gather
                     </Typography>
                     <Button href="/calendar" color="inherit">Evénements</Button>
-                    <Button href="/markers" color="inherit">Signaler</Button>
-                    {logged && <Button href="/profil" color="inherit">Profil</Button>}
-                    
+                    <Button href="/markers/add" color="inherit">Signaler</Button>
+                    {logged && <><Button href="/profil" color="inherit">Profil</Button>
+                    <Button href="/events" color="inherit">Gestion événements</Button>
+                    <Button href="/markers" color="inherit">Gestion signalements</Button>
+                    <Button href="/users" color="inherit">Gestion administrateurs</Button></>}
+
                     {logged ?
                         <Button color="inherit" onClick={() => setLog(false)}>Se déconnecter</Button> :
                         <Button color="inherit" onClick={() => setLog(true)}>Se connecter</Button>}

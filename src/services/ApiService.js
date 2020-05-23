@@ -46,6 +46,10 @@ class ApiService {
         return axios.patch(EVENT_API_BASE_URL + '/' + event.id, event);
     }
 
+    fetchNumberEvents() {
+        return axios.get(EVENT_API_BASE_URL + '/count');
+    }
+
     subscribeUser(eventId, userId) {
         return axios.post(EVENT_API_BASE_URL + '/subscribe', {event_id: eventId, user_id: userId});
     }
@@ -72,6 +76,10 @@ class ApiService {
 
     deleteMarker(markerId) {
         return axios.delete(MARKER_API_BASE_URL + '/' + markerId);
+    }
+
+    fetchNumberMarkers() {
+        return axios.get(MARKER_API_BASE_URL + '/count');
     }
 
 }

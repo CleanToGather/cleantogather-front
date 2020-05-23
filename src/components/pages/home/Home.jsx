@@ -16,6 +16,8 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            nbEvents: 0,
+            nbMarkers: 0,
             nextEvent: {
                 title:'',
                 address:'',
@@ -24,10 +26,12 @@ class Home extends React.Component {
             }
         }
         this.getNextEvent = this.getNextEvent.bind(this);
+        this.getStats = this.getStats.bind(this);
     }
 
     componentDidMount() {
         this.getNextEvent();
+        this.getStats();
     }
 
     getNextEvent() {
@@ -38,6 +42,16 @@ class Home extends React.Component {
                     let nextEvent = res.data[this.minDateIndex(datesArray)];
                     this.setState({nextEvent: nextEvent});
                 }
+            });
+    }
+
+    getStats() {
+        ApiService.fetchNumberEvents().then(res => {
+                this.setState({nbEvents: res.data});
+            });
+        ApiService.fetchNumberMarkers()
+            .then(res => {
+                this.setState({nbMarkers: res.data});
             });
     }
 
@@ -54,7 +68,7 @@ class Home extends React.Component {
             <Container maxWidth="lg">
                 <Box className="bigDiv">
                     <Typography variant="h6" display="inline"> Prochaine marche le {new Date(this.state.nextEvent.startDateTime).toLocaleString("fr-FR", {day: "numeric", month:"long", year: "numeric", hour: "numeric", minute: "numeric"})}</Typography>
-                    <EventModal event={this.state.nextEvent} canSubscribe isContained>
+                    <EventModal id="homeSubscribe" event={this.state.nextEvent} canSubscribe isContained>
                         Participer
                     </EventModal>
                 </Box>
@@ -63,7 +77,7 @@ class Home extends React.Component {
                     Signale les zones à déchets ou participe à une marche de nettoyage collaborative pour rendre ta ville plus propre !</Typography>
                 </Box>
                 <Box className="bigDiv">
-                    <Typography variant="h6">{this.props.events} marches effectuées et plus de {this.props.markers} zones à déchets signalées</Typography>
+                    <Typography variant="h6">{this.state.nbEvents} marches effectuées et plus de {this.state.nbMarkers} zones à déchets signalées</Typography>
                 </Box>
             </Container>
         );

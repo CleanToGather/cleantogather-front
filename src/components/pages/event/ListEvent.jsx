@@ -66,22 +66,22 @@ return (
                     <TableHead>
                         <TableRow>
                             <TableCell>Id</TableCell>
-                            <TableCell align="right">Titre</TableCell>
-                            <TableCell align="right">Adresse</TableCell>
-                            <TableCell align="right">Date</TableCell>
-                            <TableCell align="right">Description</TableCell>
-			    <TableCell align="right">Editer</TableCell>
-			    <TableCell align="right">Supprimer</TableCell>
+                            <TableCell align="left">Titre</TableCell>
+                            <TableCell align="left">Adresse</TableCell>
+                            <TableCell align="left">Date</TableCell>
+                            <TableCell align="left">Description</TableCell>
+			    <TableCell align="left">Editer</TableCell>
+			    <TableCell align="left">Supprimer</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.state.events.map(row => (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">{row.id}</TableCell>
-                                <TableCell align="right">{row.title}</TableCell>
-                                <TableCell align="right">{row.address}</TableCell>
-                                <TableCell align="right">{row.startDateTime}</TableCell>
-                                <TableCell align="right">{row.description}</TableCell>
+                                <TableCell align="left">{row.title}</TableCell>
+                                <TableCell align="left">{row.address}</TableCell>
+                                <TableCell align="left">{row.startDateTime}</TableCell>
+                                <TableCell align="left">{row.description}</TableCell>
                                 <TableCell align="right" onClick={() => this.editEvent(row.id)}><CreateIcon /></TableCell>
                                 <TableCell align="right" onClick={() => this.deleteEvent(row.id)}><DeleteIcon /></TableCell>
                             </TableRow>

@@ -23,7 +23,6 @@ class AddEvent extends Component{
     saveEvent = (e) => {
         e.preventDefault();
         let event = {title: this.state.title, address: this.state.address, description: this.state.description, startDateTime: this.state.startDateTime.toJSON()};
-        console.log(event);
         ApiService.addEvent(event)
             .then(res => {
                 this.setState({message : 'Event added successfully.'});
@@ -47,7 +46,7 @@ class AddEvent extends Component{
 
 		            <TextField placeholder="Adresse" fullWidth margin="normal" name="address" value={this.state.address} onChange={this.onChange}/>
 
-                    <TextField placeholder="Description" fullWidth margin="normal" name="description" value={this.state.description} onChange={this.onChange}/>
+                    <TextField placeholder="Description" fullWidth multiline margin="normal" name="description" value={this.state.description} onChange={this.onChange}/>
 
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDateTimePicker

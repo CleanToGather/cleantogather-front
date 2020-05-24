@@ -1,0 +1,11 @@
+.event {
+	border : solid 1px;
+	margin : 20px;
+	border-radius: 10px;
+	color : black;
+	padding : 20px;
+}
+
+.mr-auto {
+	width: 200px;
+}

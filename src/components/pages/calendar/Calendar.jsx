@@ -36,7 +36,7 @@ class Calendar extends React.Component {
     var debut = monthDate.getDay();
     this.state.listEvents.map(events =>{
       var date = new Date(events.startDateTime);
-      if (date.getMonth()==this.props.date.getMonth()){
+      if (date.getMonth()==this.props.date.getMonth() && date.getFullYear()==this.props.date.getFullYear()){
         this.event[debut-1+date.getDate()]=<EventModal event={events} canSubscribe >{events.title}</EventModal>;
       }
     });

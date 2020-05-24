@@ -3,28 +3,43 @@ import ApiService from "../../../services/ApiService";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 
 class Formulaire extends React.Component {
 	constructor(props){
         super(props);
         this.state ={
-            adress : '',
+            address : '',
             coord_x: '',
             coord_y: '',
             markedDateTime : new Date().toJSON(),
-            message: null
+            message: null,
+            confirm : false
         }
-        this.saveAdress = this.saveAdress.bind(this);
+        this.saveAddress = this.saveAddress.bind(this);
     }
 
-    saveAdress = (e) => {
+    saveAddress = (e) => {
         e.preventDefault();
-        let marker = {address : this.state.address, coord_x: this.state.coord_x, coord_y: this.state.coord_y, markedDateTime : this.state.markedDateTime};
-        ApiService.addMarker(marker)
-            .then(res => {
-                this.setState({message : 'Marqueur ajouté avec succès'});
-                this.props.history.push('/markers');
-            });
+        axios.get("http://nominatim.openstreetmap.org/search?format=json&limit=1&q="+this.state.address).then(response => {
+            if(response.data[0]){
+                var confirm = window.confirm("Confirmez-vous cette adresse ?\n" + response.data[0].display_name);
+                if (confirm) {
+                    this.setState({coord_x : response.data[0].lat, coord_y : response.data[0].lon});
+                    let marker = {address : this.state.address, coord_x: this.state.coord_x, coord_y: this.state.coord_y, markedDateTime : this.state.markedDateTime};
+                    ApiService.addMarker(marker)
+                        .then(res => {
+                            this.setState({message : 'Marqueur ajouté avec succès'});
+                            this.props.history.push('/markers');
+                    });
+                } 
+                
+            }
+            else{
+                this.setState({message : "Votre adresse n'a pas été trouvé"})
+            }
+        });
+        
     }
 
     onChange = (e) =>
@@ -32,16 +47,14 @@ class Formulaire extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="addMarker">
                 <Typography variant="h4">Placer un marqueur</Typography>
                 <form>
-                    <TextField type="text" placeholder="address" fullWidth margin="normal" name="address" value={this.state.address} onChange={this.onChange}/>
-                    <TextField type="text" placeholder="coord_x" fullWidth margin="normal" name="coord_x" value={this.state.coord_x} onChange={this.onChange}/>
-                    <TextField type="text" placeholder="coord_y" fullWidth margin="normal" name="coord_y" value={this.state.coord_y} onChange={this.onChange}/>
-                    <TextField type="text" placeholder="markedDateTime" fullWidth margin="normal" name="markedDateTime" value={this.state.markedDateTime} onChange={this.onChange}/>
-                    <Button variant="contained" color="primary" onClick={this.saveAdress}>Save</Button>
+                    <TextField type="text" placeholder="Adresse" fullWidth margin="normal" name="address" value={this.state.address} onChange={this.onChange}/>
+                    <Button variant="contained" color="primary" onClick={this.saveAddress}>Save</Button>
             	</form>
-	    </div>
+                <Typography style={{color : "red"}}>{this.state.message}</Typography>
+	       </div>
         );    
     }
 }

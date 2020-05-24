@@ -62,7 +62,7 @@ return (
                             <TableCell align="right">address</TableCell>
                             <TableCell align="right">coord_x</TableCell>
                             <TableCell align="right">coord_y</TableCell>
-                            <TableCell align="right">Editer</TableCell>
+                            <TableCell align="right">date</TableCell>
                             <TableCell align="right">Supprimer</TableCell>
                         </TableRow>
                     </TableHead>
@@ -73,7 +73,7 @@ return (
                                 <TableCell align="right">{row.address}</TableCell>
                                 <TableCell align="right">{row.coord_x}</TableCell>
                                 <TableCell align="right">{row.coord_y}</TableCell>
-                                <TableCell align="right" onClick={() => this.editMarker(row.id)}><CreateIcon /></TableCell>
+                                <TableCell align="right">{row.markedDateTime}</TableCell>
                                 <TableCell align="right" onClick={() => this.deleteMarker(row.id)}><DeleteIcon /></TableCell>
                             </TableRow>
                         ))}

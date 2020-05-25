@@ -33,6 +33,8 @@ class Profil extends React.Component {
                     }
                 ]
             },
+            name: "Galaad",
+            email: "galaad.moll@gmail.com"
         };
 
         this.setEditable = this.setEditable.bind(this);
@@ -45,7 +47,11 @@ class Profil extends React.Component {
     }
 
     submitEdit() {
-        this.setState({isEditable: false});
+        let newUser = this.state.user;
+        newUser.name = this.state.name;
+        newUser.email = this.state.email;
+        this.setState({user: newUser,
+            isEditable: false});
     }
 
     onChange(e) {
@@ -54,11 +60,11 @@ class Profil extends React.Component {
 
     render() {
         let pseudo =(this.state.isEditable ?
-            <TextField name="name" onChange={this.onChange} value={this.state.user.name}/> :
+            <TextField name="name" onChange={this.onChange} value={this.state.name}/> :
             <Typography variant="h6" display="inline">{this.state.user.name}</Typography>);
 
         let email =(this.state.isEditable ?
-            <TextField name="email" onChange={this.onChange} value={this.state.user.email}/> :
+            <TextField name="email" onChange={this.onChange} value={this.state.email}/> :
             <Typography variant="h6" display="inline">{this.state.user.email}</Typography>);
 
         let editIcon = (this.state.isEditable ?

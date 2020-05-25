@@ -39,7 +39,6 @@ class Formulaire extends React.Component {
                 this.setState({message : "Votre adresse n'a pas été trouvé"})
             }
         });
-        
     }
 
     onChange = (e) =>

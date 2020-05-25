@@ -31,7 +31,7 @@ class EventModal extends React.Component {
         let buttonStyle=(this.props.isContained && "MuiButton-contained MuiButton-containedPrimary");
         return (
             <>
-                <Button className={buttonStyle} id="eventModal" onClick={() => this.setModalShow(true)}>
+                <Button {...this.props} className={buttonStyle + " eventModal"} onClick={() => this.setModalShow(true)}>
                     {this.props.children}
                 </Button>
 

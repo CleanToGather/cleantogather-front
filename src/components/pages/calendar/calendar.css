@@ -1,0 +1,44 @@
+
+.ligne{
+  display: flex;
+  justify-content: space-around;
+}
+
+.cells, .empty_cells{
+  width: 150px;
+  text-align: center;
+  margin : 1%;
+}
+
+.cells {
+  border:solid 1px;
+  height : 100px;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.empty_cells {
+  height:0px;
+}
+
+.titleCalendar{
+  text-align: center;
+  font-size: 50px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.semaine {
+  width : 150px;
+  text-align: center;
+}
+
+
+.calendar {
+  margin-bottom: 50px;
+  padding-top:20px;
+  /*border-top: solid 1px;*/
+  background-color: #e0e0e0;
+  box-shadow: 0 0 0.2em;
+}

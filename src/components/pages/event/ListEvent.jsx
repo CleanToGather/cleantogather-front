@@ -8,7 +8,14 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
+import PeopleIcon from '@material-ui/icons/People';
 import Typography from '@material-ui/core/Typography';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 class ListEvent extends Component {
 
@@ -16,12 +23,15 @@ class ListEvent extends Component {
         super(props)
         this.state = {
             events: [],
-            message: null
+            message: null,
+            modalShow: false,
+            activeUsers: []
         }
         this.deleteEvent = this.deleteEvent.bind(this);
         this.editEvent = this.editEvent.bind(this);
         this.addEvent = this.addEvent.bind(this);
         this.reloadEventList = this.reloadEventList.bind(this);
+        this.handleModal = this.handleModal.bind(this);
     }
 
     componentDidMount() {
@@ -31,7 +41,8 @@ class ListEvent extends Component {
     reloadEventList() {
         ApiService.fetchEvents()
             .then((res) => {
-                this.setState({events: res.data})
+                console.log(res.data)
+                this.setState({events: res.data});
             });
     }
 
@@ -54,6 +65,11 @@ class ListEvent extends Component {
         this.props.history.push('/events/add');
     }
 
+    handleModal(bool, users) {
+        console.log(users)
+        this.setState({modalShow: bool, activeUsers: users});
+    }
+
     render() {
 return (
             <div>
@@ -70,6 +86,7 @@ return (
                             <TableCell align="left">Adresse</TableCell>
                             <TableCell align="left">Date</TableCell>
                             <TableCell align="left">Description</TableCell>
+                            <TableCell align="left">Utilisateurs</TableCell>
 			    <TableCell align="left">Editer</TableCell>
 			    <TableCell align="left">Supprimer</TableCell>
                         </TableRow>
@@ -82,13 +99,29 @@ return (
                                 <TableCell align="left">{row.address}</TableCell>
                                 <TableCell align="left">{row.startDateTime}</TableCell>
                                 <TableCell align="left">{row.description}</TableCell>
-                                <TableCell align="right" onClick={() => this.editEvent(row.id)}><CreateIcon /></TableCell>
-                                <TableCell align="right" onClick={() => this.deleteEvent(row.id)}><DeleteIcon /></TableCell>
+                                <TableCell align="center" onClick={() => this.handleModal(true, row.userSubscribed)}>
+                                    <PeopleIcon />
+                                </TableCell>
+                                <TableCell align="center" onClick={() => this.editEvent(row.id)}><CreateIcon /></TableCell>
+                                <TableCell align="center" onClick={() => this.deleteEvent(row.id)}><DeleteIcon /></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
-
+                <Dialog
+                open={this.state.modalShow}
+                onClose={() => this.handleModal(false, [])}>
+                    <DialogTitle id="form-dialog-title">Utilisateurs inscrits</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText>
+                        {this.state.activeUsers.map(user => (
+                            <DialogContentText key={user.id}>
+                                {user.email}
+                            </DialogContentText>
+                        ))}
+                      </DialogContentText>
+                    </DialogContent>
+                </Dialog>
             </div>
         );
     }

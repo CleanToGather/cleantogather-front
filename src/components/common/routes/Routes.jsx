@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from "../../pages/home/Home"
+import Login from "../../pages/login/Login.jsx"
 import ListUser from "../../pages/backoffice/user/ListUser";
 import AddUser from "../../pages/backoffice/user/AddUser";
 import EditUser from "../../pages/backoffice/user/EditUser";
@@ -18,6 +19,7 @@ const AppRouter = () => {
 	    <Router>
 		<Switch>
 		    <Route path="/" exact component={Home} />
+		    <Route path="/users/signin" exact component={Login} />
             <Route path="/users" exact component={ListUser} />
 		    <Route path="/users/add" component={AddUser} />
 		    <Route path="/users/edit" component={EditUser} />

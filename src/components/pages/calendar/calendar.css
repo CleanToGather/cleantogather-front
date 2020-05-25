@@ -21,9 +21,12 @@
   height:0px;
 }
 
-.title{
+.titleCalendar{
   text-align: center;
   font-size: 50px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
 .semaine {
@@ -31,13 +34,10 @@
   text-align: center;
 }
 
-.title{
-  display: flex;
-  justify-content: space-around;
-}
-
-
 .calendar {
-  background-color: lightblue;
   margin-bottom: 50px;
+  padding-top:20px;
+  /*border-top: solid 1px;*/
+  background-color: #e0e0e0;
+  box-shadow: 0 0 0.2em;
 }

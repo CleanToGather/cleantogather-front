@@ -11,18 +11,18 @@ class CalendarEvent extends React.Component {
     this.state = {date : new Date()};
   }
 
-  changerMois1 = () => {
+  changeMonthNext = () => {
     this.setState({date : new Date (this.state.date.getFullYear(),this.state.date.getMonth()+1,1)});
   }
 
-  changerMois2 = () => {
+  changeMonthPrevious = () => {
     this.setState({date : new Date (this.state.date.getFullYear(),this.state.date.getMonth()-1,1)});
   }
   
   render(){
     return (
       <div className="flexContainer">
-        <CalendarTitle date={this.state.date} changerMois1={this.changerMois1} changerMois2={this.changerMois2}/>
+        <CalendarTitle date={this.state.date} changeMonthNext={this.changeMonthNext} changeMonthPrevious={this.changeMonthPrevious}/>
         <div className ="calendar">
           <Calendar date={this.state.date}/>
         </div>

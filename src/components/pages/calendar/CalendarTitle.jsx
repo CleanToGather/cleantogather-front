@@ -1,17 +1,19 @@
 import React from "react";
-import Button from '@material-ui/core/Button';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import IconButton from '@material-ui/core/IconButton';
 
 class CalendarTitle extends React.Component {
 	render(){
 		var listMois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
-		return (<div className='title'>
-      		<Button variant="contained" color="primary" onClick={this.props.changerMois2}>
-        		Clique ici
-      		</Button>
+		return (<div className='titleCalendar'>
+      		<IconButton onClick={this.props.changeMonthPrevious}>
+            <ArrowBackIosIcon/>
+          </IconButton>
       		<h1>{listMois[this.props.date.getMonth()]} {this.props.date.getFullYear()}</h1>
-      		<Button onClick={this.props.changerMois1}>
-        		Clique ici
-      		</Button>
+      		<IconButton onClick={this.props.changeMonthNext}>
+            <ArrowForwardIosIcon/>
+          </IconButton>
       	</div>
     	);
 	}

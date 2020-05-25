@@ -16,7 +16,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
 class ListEvent extends Component {
 
     constructor(props) {
@@ -41,7 +40,6 @@ class ListEvent extends Component {
     reloadEventList() {
         ApiService.fetchEvents()
             .then((res) => {
-                console.log(res.data)
                 this.setState({events: res.data});
             });
     }
@@ -69,7 +67,7 @@ class ListEvent extends Component {
         console.log(users)
         this.setState({modalShow: bool, activeUsers: users});
     }
-
+        
     render() {
 return (
             <div>

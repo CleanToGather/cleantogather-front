@@ -3,12 +3,13 @@ import CalendarLine from "./CalendarLine";
 import ApiService from "../../../services/ApiService";
 import EventModal from '../../common/modals/EventModal';
 
+const numberCells = 42
 
 class Calendar extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
-    this.calendar = new Array(42);
-    this.event = new Array(42);
+    this.calendar = new Array(numberCells);
+    this.event = new Array(numberCells);
     this.state = {
       listEvents : []
     }
@@ -31,12 +32,12 @@ class Calendar extends React.Component {
   }
 
   addEventsInCalendar(){
-    this.event = new Array(42);
+    this.event = new Array(numberCells);
     var monthDate = new Date(this.props.date.getFullYear(),this.props.date.getMonth(),1);
     var debut = monthDate.getDay();
     this.state.listEvents.map(events =>{
       var date = new Date(events.startDateTime);
-      if (date.getMonth()==this.props.date.getMonth()){
+      if (date.getMonth()==this.props.date.getMonth() && date.getFullYear()==this.props.date.getFullYear()){
         this.event[debut-1+date.getDate()]=<EventModal event={events} canSubscribe >{events.title}</EventModal>;
       }
     });

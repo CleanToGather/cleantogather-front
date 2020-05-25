@@ -10,6 +10,7 @@ import Profil from "../../pages/profil/Profil";
 import CalendarEvent from "../../pages/calendar/CalendarEvent";
 import AddMarker from "../../pages/marker/AddMarkers";
 import ListMarker from "../../pages/marker/ListMarkers";
+import ListEvents from "../../pages/listEvents/ListEvents.jsx";
 import React from "react";
 
 const AppRouter = () => {
@@ -28,6 +29,7 @@ const AppRouter = () => {
             <Route path="/calendar" component={CalendarEvent} />
             <Route path="/markers/add" component={AddMarker} />
             <Route path="/markers" component={ListMarker} />
+            <Route path="/listEvents" component={ListEvents} />
 		</Switch>
 	    </Router>
 	</div>

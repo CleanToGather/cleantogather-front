@@ -1,7 +1,7 @@
 import React from "react";
 import CalendarLine from "./CalendarLine";
-import ApiService from "../../../services/ApiService";
-import EventModal from '../../common/modals/EventModal';
+import ApiService from "../../../../services/ApiService";
+import EventModal from '../../../common/modals/EventModal';
 
 const numberCells = 42
 
@@ -22,7 +22,7 @@ class Calendar extends React.Component {
   getEvents(){
     var addEvent = this.state.listEvents;
     ApiService.fetchEvents().then(res => {
-      if (res.data.length > 0) {  
+      if (res.data.length > 0) {
         res.data.map(event => {
           addEvent.push(event);
         });
@@ -51,7 +51,7 @@ class Calendar extends React.Component {
       this.calendar[j]='';
       j++;
     }
-    
+
     while (mapMonth!=NaN && mapMonth.getMonth()==this.props.date.getMonth()){
       this.calendar[j]=i.toString();
       j++;

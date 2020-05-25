@@ -1,16 +1,15 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from "../../pages/home/Home"
-import ListUser from "../../pages/user/ListUser";
-import AddUser from "../../pages/user/AddUser";
-import EditUser from "../../pages/user/EditUser";
-import ListEvent from "../../pages/event/ListEvent";
-import AddEvent from "../../pages/event/AddEvent";
-import EditEvent from "../../pages/event/EditEvent";
+import ListUser from "../../pages/backoffice/user/ListUser";
+import AddUser from "../../pages/backoffice/user/AddUser";
+import EditUser from "../../pages/backoffice/user/EditUser";
+import ListEvent from "../../pages/backoffice/event/ListEvent";
+import AddEvent from "../../pages/backoffice/event/AddEvent";
+import EditEvent from "../../pages/backoffice/event/EditEvent";
 import Profil from "../../pages/profil/Profil";
-import CalendarEvent from "../../pages/calendar/CalendarEvent";
-import AddMarker from "../../pages/marker/AddMarkers";
-import ListMarker from "../../pages/marker/ListMarkers";
-import ListEvents from "../../pages/listEvents/ListEvents.jsx";
+import Event from "../../pages/event/Event";
+import AddMarker from "../../pages/backoffice/marker/AddMarkers";
+import ListMarker from "../../pages/backoffice/marker/ListMarkers";
 import React from "react";
 
 const AppRouter = () => {
@@ -26,10 +25,9 @@ const AppRouter = () => {
 		    <Route path="/events/add" component={AddEvent} />
 		    <Route path="/events/edit" component={EditEvent} />
             <Route path="/profil" component={Profil} />
-            <Route path="/calendar" component={CalendarEvent} />
+            <Route path="/calendar" component={Event} />
             <Route path="/markers/add" component={AddMarker} />
             <Route path="/markers" component={ListMarker} />
-            <Route path="/listEvents" component={ListEvents} />
 		</Switch>
 	    </Router>
 	</div>

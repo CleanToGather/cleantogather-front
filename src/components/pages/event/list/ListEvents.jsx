@@ -1,6 +1,6 @@
 import React from "react";
 import "./listEvents.css";
-import ApiService from "../../../services/ApiService";
+import ApiService from "../../../../services/ApiService";
 import Modal from 'react-bootstrap/Modal';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -21,7 +21,7 @@ class ListEvents extends React.Component {
   	getEvents(){
     	var addEvent = this.state.listEvents;
     	ApiService.fetchEvents().then(res => {
-      	if (res.data.length > 0) {  
+      	if (res.data.length > 0) {
         	res.data.map(event => {
           	addEvent.push(event);
         	});

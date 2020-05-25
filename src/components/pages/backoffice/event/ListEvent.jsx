@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ApiService from "../../../services/ApiService";
+import ApiService from "../../../../services/ApiService";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -67,7 +67,7 @@ class ListEvent extends Component {
         console.log(users)
         this.setState({modalShow: bool, activeUsers: users});
     }
-        
+
     render() {
 return (
             <div>

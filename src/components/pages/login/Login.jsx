@@ -26,8 +26,10 @@ class Login extends Component {
         const credentials = {username: this.state.username, password: this.state.password};
         AuthService.login(credentials).then(res => {
             if(res.status === 200){
+                localStorage.setItem("username", this.state.username);
                 localStorage.setItem("userInfo", JSON.stringify(res.data));
-                this.props.history.push('/users');
+                this.props.history.push('/');
+                window.location.reload(false);
             }else {
                 this.setState({message: res.data.message});
             }

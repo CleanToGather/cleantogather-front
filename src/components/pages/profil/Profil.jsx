@@ -8,6 +8,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import { validate } from '../../../services/ValidateForm';
+import ApiService from '../../../services/ApiService';
 
 import '../home/Home.css'
 
@@ -18,32 +19,29 @@ class Profil extends React.Component {
             isValid: false,
             message: false,
             user: {
-                name: "Galaad",
-                email: "galaad.moll@gmail.com",
-                eventSubscribed: [
-                    {
-                        title: "Titre",
-                        address: "13 Adresse idene ziudgshfil, PAis",
-                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                        startDateTime: "11 mai 2020 à 13:00"
-                    },
-                    {
-                        id: 1,
-                        title: "Titre",
-                        address: "13 Adresse idene ziudgshfil, PAis",
-                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                        startDateTime: "11 mai 2020 à 13:00"
-                    }
-                ]
+                name: "",
+                email: "",
+                eventSubscribed: []
             },
-            name: "Galaad",
-            email: "galaad.moll@gmail.com"
+            name: "",
+            email: ""
         };
 
         this.setEditable = this.setEditable.bind(this);
         this.submitEdit = this.submitEdit.bind(this);
         this.cancelEdit = this.cancelEdit.bind(this);
         this.onChange = this.onChange.bind(this);
+    }
+
+    componentDidMount() {
+        this.getUser();
+    }
+
+    getUser() {
+        ApiService.fetchUserByName(localStorage.username)
+            .then(res => {
+                this.setState({user: res.data, name: res.data.name, email: res.data.email})
+            });
     }
 
     setEditable() {

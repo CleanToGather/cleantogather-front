@@ -15,6 +15,14 @@ class ApiService {
         return axios.get(USER_API_BASE_URL + '/' + userId, AuthService.getAuthHeader());
     }
 
+    fetchUserByMail(eventMail) {
+        return axios.get(USER_API_BASE_URL + '/mail/' + eventMail);
+    }
+
+    fetchUserByName(name) {
+        return axios.get(USER_API_BASE_URL + '/name/' + name);
+    }
+
     deleteUser(userId) {
         return axios.delete(USER_API_BASE_URL + '/' + userId, AuthService.getAuthHeader());
     }
@@ -52,7 +60,7 @@ class ApiService {
     }
 
     subscribeUser(eventId, userId) {
-        return axios.post(EVENT_API_BASE_URL + '/subscribe', {event_id: eventId, user_id: userId}, AuthService.getAuthHeader());
+        return axios.post(EVENT_API_BASE_URL + '/subscribe?event_id=' + eventId +"&user_id=" + userId, AuthService.getAuthHeader());
     }
 
     fetchSubscribedUser(eventId) {

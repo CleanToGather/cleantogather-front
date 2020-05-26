@@ -17,8 +17,13 @@ const style = {
     flexGrow: 1
 }
 const NavBar = () => {
-    const [logged, setLog] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [logged, setLog] = useState(localStorage.userInfo);
+
+    const unLog = () => {
+        localStorage.removeItem('userInfo');
+        setLog(false);
+    }
 
     const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,8 +43,8 @@ const NavBar = () => {
         <Button href="/users" color="inherit">Gestion utilisateurs</Button></>}
 
         {logged ?
-            <Button color="inherit" onClick={() => setLog(false)}>Se déconnecter</Button> :
-            <Button color="inherit" onClick={() => setLog(true)}>Se connecter</Button>}
+            <Button color="inherit" onClick={unLog}>Se déconnecter</Button> :
+            <Button color="inherit" href="/signin">Se connecter</Button>}
     </>;
 
     return (

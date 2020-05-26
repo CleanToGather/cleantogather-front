@@ -1,11 +1,11 @@
-import React from 'react';
-import AuthService from '../../../services/ApiService';
+import React, { Component } from 'react';
+import AuthService from '../../../services/AuthService';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-class Login extends React.Component {
+class Login extends Component {
 
     constructor(props){
         super(props);
@@ -25,8 +25,8 @@ class Login extends React.Component {
         e.preventDefault();
         const credentials = {username: this.state.username, password: this.state.password};
         AuthService.login(credentials).then(res => {
-            if(res.data.status === 200){
-                localStorage.setItem("userInfo", JSON.stringify(res.data.result));
+            if(res.status === 200){
+                localStorage.setItem("userInfo", JSON.stringify(res.data));
                 this.props.history.push('/users');
             }else {
                 this.setState({message: res.data.message});
@@ -39,23 +39,25 @@ class Login extends React.Component {
 
     render() {
         return(
-            <React.Fragment>
-                <Container maxWidth="sm">
-                    <Typography variant="h4" style={styles.center}>Login</Typography>
-                    <form>
-                        <Typography variant="h4" style={styles.notification}>{this.state.message}</Typography>
-                        <TextField type="text" label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} onChange={this.onChange}/>
+	    <Container maxWidth="sm">
+            	<Typography variant="h4" style={styles.center}>Login</Typography>
+		<form style={formContainer}>
+		    <Typography variant="h4" style={styles.notification}>{this.state.message}</Typography>
+		    <TextField type="text" label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} onChange={this.onChange}/>
 
-                        <TextField type="password" label="PASSWORD" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
+		    <TextField type="password" label="PASSWORD" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
 
-                        <Button variant="contained" color="secondary" onClick={this.login}>Login</Button>
-                    </form>
-                </Container>
-            </React.Fragment>
-        )
+		    <Button variant="contained" color="secondary" onClick={this.login}>Login</Button>
+		</form>
+	    </Container>
+        );
     }
 
 }
+const formContainer = {
+    display: 'flex',
+    flexFlow: 'row wrap'
+};
 
 const styles= {
     center :{

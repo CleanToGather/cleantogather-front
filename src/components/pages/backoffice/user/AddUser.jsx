@@ -43,8 +43,6 @@ class AddUser extends Component{
 
                     <TextField type="password" placeholder="password" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
 
-                    <TextField placeholder="role" fullWidth margin="normal" name="role" value={this.state.role} onChange={this.onChange}/>
-
                     <Button variant="contained" color="primary" onClick={this.saveUser}>Save</Button>
             	</form>
 	    </div>

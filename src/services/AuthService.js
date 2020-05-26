@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const USER_API_BASE_URL = 'http://localhost:8080/users/';
+const USER_API_BASE_URL = 'http://localhost:8080/signin';
 
 class AuthService {
 
     login(credentials){
-        return axios.post(USER_API_BASE_URL + "signin", credentials);
+        return axios.post(USER_API_BASE_URL + "?name=" + credentials.username + "&password=" + credentials.password);
     }
 
     getUserInfo(){
@@ -13,7 +13,7 @@ class AuthService {
     }
 
     getAuthHeader() {
-       return {headers: {Authorization: 'Bearer ' + this.getUserInfo().token }};
+       return {headers: {Authorization: 'Bearer ' + this.getUserInfo() }};
     }
 
 }

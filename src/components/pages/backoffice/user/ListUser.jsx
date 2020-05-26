@@ -18,6 +18,7 @@ class ListUser extends Component {
             users: [],
             message: null
         }
+	this.signin = this.signin.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
         this.editUser = this.editUser.bind(this);
         this.addUser = this.addUser.bind(this);
@@ -52,6 +53,10 @@ class ListUser extends Component {
     addUser() {
         window.localStorage.removeItem("userId");
         this.props.history.push('/users/add');
+    }
+    
+    signin() {
+	this.props.history.push('/users/signin');
     }
 
     render() {

@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
+import { validate } from "../../../../services/ValidateForm";
 
 class EditEvent extends Component {
 
@@ -39,20 +40,24 @@ class EditEvent extends Component {
             });
     }
 
-    onChange = (e) =>
+    onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
+        validate(e.target, this);
+    }
 
     handleDateChange = (date) =>
         this.setState({startDateTime: date});
 
     saveEvent = (e) => {
         e.preventDefault();
+        if (this.state.isValid) {
 	let event = {id: this.state.id, title: this.state.title, address: this.state.address, description: this.state.description, startDateTime: this.state.startDateTime};
         ApiService.editEvent(event)
             .then(res => {
                 this.setState({message : 'Event added successfully.'});
                 this.props.history.push('/events');
             });
+        }
     }
 
     render() {
@@ -83,6 +88,7 @@ class EditEvent extends Component {
                         <Button variant="contained" color="primary" onClick={this.saveEvent}>Save</Button>
 
                 </form>
+                <Typography style={{color: "red"}}>{this.state.message}</Typography>
             </div>
         );
     }

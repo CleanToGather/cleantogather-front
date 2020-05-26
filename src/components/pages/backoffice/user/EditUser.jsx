@@ -3,6 +3,7 @@ import ApiService from "../../../../services/ApiService";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { validate } from "../../../../services/ValidateForm";
 
 class EditUser extends Component {
 
@@ -35,17 +36,21 @@ class EditUser extends Component {
             });
     }
 
-    onChange = (e) =>
+    onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
+        validate(e.target, this);
+    }
 
     saveUser = (e) => {
         e.preventDefault();
+        if (this.state.isValid) {
 	let user = {id: this.state.id, email: this.state.email, name: this.state.name, role: this.state.role};
         ApiService.editUser(user)
             .then(res => {
                 this.setState({message : 'User added successfully.'});
                 this.props.history.push('/users');
             });
+        }
     }
 
     render() {
@@ -54,15 +59,16 @@ class EditUser extends Component {
                 <Typography variant="h4" style={style}>Edit User</Typography>
                 <form>
 
-                        <TextField type="text" placeholder="name" fullWidth margin="normal" name="name" readOnly={true} value={this.state.name}/>
+                        <TextField type="text" placeholder="Nom" fullWidth margin="normal" name="name" readOnly={true} value={this.state.name}/>
 
-                        <TextField placeholder="Email" fullWidth margin="normal" name="email" value={this.state.email} onChange={this.onChange}/>
+                        <TextField placeholder="Email" type="email" fullWidth margin="normal" name="email" value={this.state.email} onChange={this.onChange}/>
 
                         <TextField placeholder="Role" fullWidth margin="normal" name="role" value={this.state.role} onChange={this.onChange}/>
 
                         <Button variant="contained" color="primary" onClick={this.saveUser}>Save</Button>
 
                 </form>
+                <Typography style={{color: "red"}}>{this.state.message}</Typography>
             </div>
         );
     }

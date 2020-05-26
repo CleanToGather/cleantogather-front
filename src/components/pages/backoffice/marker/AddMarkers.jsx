@@ -14,13 +14,13 @@ class Formulaire extends React.Component {
             coord_y: '',
             markedDateTime : new Date().toJSON(),
             message: null,
-            confirm : false
+            confirm : false,
+			isValid: false
         }
         this.saveAddress = this.saveAddress.bind(this);
     }
 
     saveAddress = (e) => {
-        e.preventDefault();
         axios.get("http://nominatim.openstreetmap.org/search?format=json&limit=1&q="+this.state.address).then(response => {
             if(response.data[0]){
                 var confirm = window.confirm("Confirmez-vous cette adresse ?\n" + response.data[0].display_name);
@@ -41,16 +41,17 @@ class Formulaire extends React.Component {
         });
     }
 
-    onChange = (e) =>
-        this.setState({ [e.target.name]: e.target.value });
+    onChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
+	}
 
     render() {
         return(
             <div className="addMarker">
                 <Typography variant="h4">Placer un marqueur</Typography>
-                <form>
+                <form onSubmit={e => { e.preventDefault(); }}>
                     <TextField type="text" placeholder="Adresse" fullWidth margin="normal" name="address" value={this.state.address} onChange={this.onChange}/>
-                    <Button variant="contained" color="primary" onClick={this.saveAddress}>Save</Button>
+                    <Button variant="contained" color="primary" onClick={this.saveAddress}>Signaler</Button>
             	</form>
                 <Typography style={{color : "red"}}>{this.state.message}</Typography>
 	       </div>

@@ -35,7 +35,7 @@ const NavBar = () => {
         {logged && <><Button href="/profil" color="inherit">Profil</Button>
         <Button href="/events" color="inherit">Gestion événements</Button>
         <Button href="/markers" color="inherit">Gestion signalements</Button>
-        <Button href="/users" color="inherit">Gestion administrateurs</Button></>}
+        <Button href="/users" color="inherit">Gestion utilisateurs</Button></>}
 
         {logged ?
             <Button color="inherit" onClick={() => setLog(false)}>Se déconnecter</Button> :

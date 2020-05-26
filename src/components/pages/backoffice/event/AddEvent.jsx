@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
+import { validate } from '../../../../services/ValidateForm';
 
 class AddEvent extends Component{
 
@@ -15,23 +16,28 @@ class AddEvent extends Component{
 	        address: '',
             description: '',
 	        startDateTime: new Date(),
-            message: null
+            message: null,
+            isValid: false
         }
         this.saveEvent = this.saveEvent.bind(this);
     }
 
     saveEvent = (e) => {
         e.preventDefault();
-        let event = {title: this.state.title, address: this.state.address, description: this.state.description, startDateTime: this.state.startDateTime.toJSON()};
-        ApiService.addEvent(event)
-            .then(res => {
-                this.setState({message : 'Event added successfully.'});
-                this.props.history.push('/events');
-            });
+        if (this.state.isValid) {
+            let event = {title: this.state.title, address: this.state.address, description: this.state.description, startDateTime: this.state.startDateTime.toJSON()};
+            ApiService.addEvent(event)
+                .then(res => {
+                    this.setState({message : 'Event added successfully.'});
+                    this.props.history.push('/events');
+                });
+        }
     }
 
-    onChange = (e) =>
+    onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
+        validate(e.target, this);
+    }
 
     handleDateChange = (date) =>
         this.setState({startDateTime: date});
@@ -39,7 +45,7 @@ class AddEvent extends Component{
     render() {
         return(
             <div>
-                <Typography variant="h4" style={style}>Add Event</Typography>
+                <Typography variant="h4" style={style}>Créer un événement</Typography>
                 <form style={formContainer}>
 
                     <TextField placeholder="Titre" fullWidth margin="normal" name="title" value={this.state.title} onChange={this.onChange}/>
@@ -61,8 +67,10 @@ class AddEvent extends Component{
                       />
                     </MuiPickersUtilsProvider>
 
-                    <Button variant="contained" color="primary" onClick={this.saveEvent}>Save</Button>
+                    <Button variant="contained" color="primary" onClick={this.saveEvent}>Ajouter</Button>
+
             	</form>
+                <Typography style={{color: "red"}}>{this.state.message}</Typography>
 	    </div>
         );
     }

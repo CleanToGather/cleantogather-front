@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
-import DoneIcon from '@material-ui/icons/Done'
+import DoneIcon from '@material-ui/icons/Done';
+import { validate } from '../../../services/ValidateForm';
 
 import '../home/Home.css'
 
@@ -14,6 +15,8 @@ class Profil extends React.Component {
     constructor (props) {
         super(props);
         this.state = {isEditable : false,
+            isValid: false,
+            message: false,
             user: {
                 name: "Galaad",
                 email: "galaad.moll@gmail.com",
@@ -39,46 +42,58 @@ class Profil extends React.Component {
 
         this.setEditable = this.setEditable.bind(this);
         this.submitEdit = this.submitEdit.bind(this);
+        this.cancelEdit = this.cancelEdit.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
-    setEditable(bool) {
-        this.setState({isEditable: bool});
+    setEditable() {
+        this.setState({isEditable: true});
+    }
+
+    cancelEdit() {
+        this.setState({isEditable: false,
+            name: this.state.user.name,
+            email: this.state.user.email,
+            message: false
+        });
     }
 
     submitEdit() {
-        let newUser = this.state.user;
-        newUser.name = this.state.name;
-        newUser.email = this.state.email;
-        this.setState({user: newUser,
-            isEditable: false});
+        if (this.state.isValid) {
+            let newUser = this.state.user;
+            newUser.name = this.state.name;
+            newUser.email = this.state.email;
+            this.setState({user: newUser,
+                isEditable: false});
+        }
     }
 
     onChange(e) {
-        this.setState({[e.target.name] : e.target.value})
+        this.setState({[e.target.name] : e.target.value});
+        validate(e.target, this);
     }
 
     render() {
         let pseudo =(this.state.isEditable ?
-            <TextField name="name" onChange={this.onChange} value={this.state.name}/> :
+            <TextField placeholder="Pseudo" name="name" onChange={this.onChange} value={this.state.name}/> :
             <Typography variant="h6" display="inline">{this.state.user.name}</Typography>);
 
         let email =(this.state.isEditable ?
-            <TextField name="email" onChange={this.onChange} value={this.state.email}/> :
+            <TextField placeholder="Email" type="email" name="email" onChange={this.onChange} value={this.state.email}/> :
             <Typography variant="h6" display="inline">{this.state.user.email}</Typography>);
 
         let editIcon = (this.state.isEditable ?
-            //True
+            //Edit mode
             <>
             <IconButton aria-label="edit" onClick={this.submitEdit}>
                 <DoneIcon />
             </IconButton>
-            <IconButton aria-label="edit" onClick={() => this.setEditable(false)}>
+            <IconButton aria-label="edit" onClick={this.cancelEdit}>
                 <CloseIcon />
             </IconButton>
             </> :
-            //False
-            <IconButton aria-label="edit" onClick={() => this.setEditable(true)}>
+            //Normal mode
+            <IconButton aria-label="edit" onClick={this.setEditable}>
                 <EditIcon />
             </IconButton>);
 
@@ -97,6 +112,9 @@ class Profil extends React.Component {
                         </Grid>
                         <Grid item>
                             <Typography variant="h6" display="inline">Email : &nbsp;</Typography>{email}
+                        </Grid>
+                        <Grid item>
+                            <Typography style={{color: "red"}} display="inline">{this.state.message}</Typography>
                         </Grid>
                     </Grid>
                 </Grid>

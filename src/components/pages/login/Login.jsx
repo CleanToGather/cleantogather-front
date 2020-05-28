@@ -49,7 +49,7 @@ class Login extends Component {
 
 		    <TextField type="password" label="PASSWORD" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
 
-		    <Button variant="contained" color="secondary" onClick={this.login}>Login</Button>
+		    <Button variant="contained" color="primary" onClick={this.login}>Login</Button>
 		</form>
 	    </Container>
         );

@@ -22,3 +22,9 @@ body {
 a:hover {
     color: white;
 }
+
+@media (max-width: 1000px) {
+    a:hover {
+        color: black;
+    }
+}

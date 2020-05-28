@@ -29,8 +29,10 @@ class ListUser extends Component {
     }
 
     reloadUserList() {
+        console.log("trying")
         ApiService.fetchUsers()
             .then((res) => {
+                console.log(res.data);
                 this.setState({users: res.data})
             });
     }
@@ -68,7 +70,6 @@ return (
                             <TableCell>Id</TableCell>
                             <TableCell align="right">Nom</TableCell>
                             <TableCell align="right">Email</TableCell>
-                            <TableCell align="right">Role</TableCell>
 			    <TableCell align="right">Editer</TableCell>
 			    <TableCell align="right">Supprimer</TableCell>
                         </TableRow>
@@ -79,7 +80,6 @@ return (
                                 <TableCell component="th" scope="row">{row.id}</TableCell>
                                 <TableCell align="right">{row.name}</TableCell>
                                 <TableCell align="right">{row.email}</TableCell>
-                                <TableCell align="right">{row.role}</TableCell>
                                 <TableCell align="right" onClick={() => this.editUser(row.id)}><CreateIcon /></TableCell>
                                 <TableCell align="right" onClick={() => this.deleteUser(row.id)}><DeleteIcon /></TableCell>
 

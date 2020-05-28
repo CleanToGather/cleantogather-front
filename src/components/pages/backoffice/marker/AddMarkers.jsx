@@ -27,10 +27,14 @@ class Formulaire extends React.Component {
                 if (confirm) {
                     this.setState({coord_x : response.data[0].lat, coord_y : response.data[0].lon});
                     let marker = {address : this.state.address, coord_x: this.state.coord_x, coord_y: this.state.coord_y, markedDateTime : this.state.markedDateTime};
+					console.log(marker)
                     ApiService.addMarker(marker)
                         .then(res => {
                             this.setState({message : 'Marqueur ajouté avec succès'});
-                            this.props.history.push('/markers');
+							if (localStorage.userInfo)
+                            	this.props.history.push('/markers');
+							else
+								this.props.history.push('/');
                     });
                 }
 

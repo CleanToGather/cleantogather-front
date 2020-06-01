@@ -10,7 +10,7 @@ cd cleantogather-front
 npm install
 npm start
 ```
-The application started in the development mode.<br />
+The application started in development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Learn More

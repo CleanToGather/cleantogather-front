@@ -77,7 +77,7 @@ class Home extends React.Component {
                     Signale les zones à déchets ou participe à une marche de nettoyage collaborative pour rendre ta ville plus propre !</Typography>
                 </Box>
                 <Box className="bigDiv">
-                    <Typography variant="h6">{this.state.nbEvents} marches effectuées et plus de {this.state.nbMarkers} zones à déchets signalées</Typography>
+                    <Typography variant="h6">Déjà {this.state.nbEvents} marches effectuées ou à venir et plus de {this.state.nbMarkers} zones à déchets signalées</Typography>
                 </Box>
             </Container>
         );

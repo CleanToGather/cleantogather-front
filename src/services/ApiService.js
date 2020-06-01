@@ -28,7 +28,7 @@ class ApiService {
     }
 
     addUser(user) {
-        return axios.post(""+USER_API_BASE_URL, user, AuthService.getAuthHeader());
+        return axios.post(USER_API_BASE_URL, user);
     }
 
     editUser(user) {
@@ -36,7 +36,7 @@ class ApiService {
     }
 
     fetchEvents() {
-        return axios.get(EVENT_API_BASE_URL, AuthService.getAuthHeader());
+        return axios.get(EVENT_API_BASE_URL);
     }
 
     fetchEventById(eventId) {
@@ -56,11 +56,11 @@ class ApiService {
     }
 
     fetchNumberEvents() {
-        return axios.get(EVENT_API_BASE_URL + '/count', AuthService.getAuthHeader());
+        return axios.get(EVENT_API_BASE_URL + '/count');
     }
 
     subscribeUser(eventId, userId) {
-        return axios.post(EVENT_API_BASE_URL + '/subscribe?event_id=' + eventId +"&user_id=" + userId, AuthService.getAuthHeader());
+        return axios.post(EVENT_API_BASE_URL + '/subscribe?event_id=' + eventId +"&user_id=" + userId);
     }
 
     fetchSubscribedUser(eventId) {
@@ -72,7 +72,7 @@ class ApiService {
     }
 
     addMarker(marker) {
-        return axios.post(""+MARKER_API_BASE_URL, marker, AuthService.getAuthHeader());
+        return axios.post(""+MARKER_API_BASE_URL, marker);
     }
 
     fetchMarkers() {
@@ -88,7 +88,7 @@ class ApiService {
     }
 
     fetchNumberMarkers() {
-        return axios.get(MARKER_API_BASE_URL + '/count', AuthService.getAuthHeader());
+        return axios.get(MARKER_API_BASE_URL + '/count');
     }
 
 }

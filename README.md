@@ -2,7 +2,7 @@
 
 ## Installation
 
-### You need to launch the server before : [cleantogather-api](https://github.com/Elorolf/cleantogather-api)
+### You need to launch the REST api before : [cleantogather-api](https://github.com/Elorolf/cleantogather-api)
 
 ```sh
 git clone git@github.com:Elorolf/cleantogather-front.git
@@ -10,7 +10,7 @@ cd cleantogather-front
 npm install
 npm start
 ```
-Runs the app in the development mode.<br />
+The application started in development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Learn More

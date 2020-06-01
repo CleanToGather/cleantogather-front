@@ -59,10 +59,10 @@ return (
                     <TableHead>
                         <TableRow>
                             <TableCell>Id</TableCell>
-                            <TableCell align="right">address</TableCell>
-                            <TableCell align="right">coord_x</TableCell>
-                            <TableCell align="right">coord_y</TableCell>
-                            <TableCell align="right">date</TableCell>
+                            <TableCell align="right">Adresse</TableCell>
+                            <TableCell align="right">Latitude</TableCell>
+                            <TableCell align="right">Longitude</TableCell>
+                            <TableCell align="right">Date</TableCell>
                             <TableCell align="right">Supprimer</TableCell>
                         </TableRow>
                     </TableHead>

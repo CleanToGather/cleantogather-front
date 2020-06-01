@@ -28,13 +28,13 @@ class EventModal extends React.Component {
         if (this.state.isValid) {
             ApiService.fetchUserByMail(this.state.mail)
                 .then(res => {
-                    ApiService.subscribeUser(this.props.event.id, res.data.id)
-                        .then(res => {
-                            this.setState({message: "Vous etes inscrit"});
-                        });
-                })
-                .catch(e => {
-                    if (e.response.data.message == "This resource could not be found") {
+                    if (res.data) {
+                        ApiService.subscribeUser(this.props.event.id, res.data.id)
+                            .then(res => {
+                                this.setState({message: "Vous etes inscrit"});
+                            });
+                    }
+                    else {
                         ApiService.addUser({email: this.state.mail, role: "VISITOR"})
                             .then(res =>  {
                                 ApiService.subscribeUser(this.props.event.id, res.data.id)

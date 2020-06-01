@@ -126,7 +126,7 @@ class Profil extends React.Component {
                                 <EventModal event={event}>
                                 <Grid justify="flex-start">
                                     <Typography variant="h6" display="block">{event.title}</Typography><br/>
-                                    <Typography display="block">Le {event.startDateTime}</Typography>
+                                    <Typography display="block">Le {new Date(event.startDateTime).toLocaleString("fr-FR", {day: "numeric", month:"long", year: "numeric", hour: "numeric", minute: "numeric"})}</Typography>
                                 </Grid>
                                 </EventModal>
                             </Grid>

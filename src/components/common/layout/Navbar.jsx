@@ -23,6 +23,7 @@ const NavBar = () => {
     const unLog = () => {
         localStorage.removeItem('userInfo');
         setLog(false);
+        window.location.reload(false);
     }
 
     const handleClick = (event) => {
